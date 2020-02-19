@@ -1,7 +1,7 @@
 from gi.repository import Nautilus, GObject, Gtk
-from urlparse import urlparse
+from urllib.parse import urlparse
 import os
-import string
+
 class DiskUsageLocationWidget(GObject.GObject, Nautilus.LocationWidgetProvider):
     def __init__(self):
         pass
@@ -47,7 +47,7 @@ class DiskUsageLocationWidget(GObject.GObject, Nautilus.LocationWidgetProvider):
         label = Gtk.Label()
         full_url = urlparse(uri)
         file_url = full_url.path
-        file_url_no_special_whitespace_chars = string.replace(file_url, '%20', ' ')
+        file_url_no_special_whitespace_chars = file_url.replace('%20', ' ')
         disk_free = self.get_fs_freespace(file_url_no_special_whitespace_chars)
         disk_free_gb = round(disk_free / 1024 / 1024 / 1024.0, 2)
         string_output = "Disk free: " + str(disk_free_gb) + " GB"
