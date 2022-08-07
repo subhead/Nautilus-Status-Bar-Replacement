@@ -40,15 +40,21 @@ class DiskUsageLocationWidget(GObject.GObject, Nautilus.LocationWidgetProvider):
         # use f_bfree for superuser, or f_bavail if filesystem
         # has reserved space for superuser
         return stat.f_bavail*stat.f_bsize
-
-    def get_widget(self, uri, window):
-        entry = Gtk.Entry()
+    
+        def get_widget(self, uri, window):
+        if window.get_decorated()==False:
+            return None # disable for the desktop "window"
+        label = Gtk.Label()
         full_url = urlparse(uri)
         file_url = full_url.path
         file_url_no_special_whitespace_chars = file_url.replace('%20', ' ')
         disk_free = self.get_fs_freespace(file_url_no_special_whitespace_chars)
         disk_free_gb = round(disk_free / 1024 / 1024 / 1024.0, 2)
         string_output = "Disk free: " + str(disk_free_gb) + " GB"
-        entry.set_text(string_output)
-        entry.show()
-        return entry
+        label.set_text(string_output)
+        label.set_selectable(False)
+        label.set_xalign(0.01)
+        label.set_max_width_chars(len(string_output))
+        label.show()
+        return label
+
