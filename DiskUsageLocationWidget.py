@@ -41,7 +41,7 @@ class DiskUsageLocationWidget(GObject.GObject, Nautilus.LocationWidgetProvider):
         # has reserved space for superuser
         return stat.f_bavail*stat.f_bsize
     
-        def get_widget(self, uri, window):
+    def get_widget(self, uri, window):
         if window.get_decorated()==False:
             return None # disable for the desktop "window"
         label = Gtk.Label()
@@ -57,4 +57,3 @@ class DiskUsageLocationWidget(GObject.GObject, Nautilus.LocationWidgetProvider):
         label.set_max_width_chars(len(string_output))
         label.show()
         return label
-
