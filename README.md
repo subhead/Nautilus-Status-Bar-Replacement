@@ -10,3 +10,15 @@ Nautilus Python extension that shows in a textbox the disk space left when viewi
 Installation (on Debian)
 ===============================
 Copy the extension file DiskUsageLocationWidget.py in one of the following directories: /usr/share/nautilus-python/extensions/ or  ~/.local/share/nautilus-python/extensions/
+
+In a terminal you kill nautilus with
+
+$ nautilus -q
+
+Afterwards you can relaunch it with
+
+$ nautilus --no-desktop
+
+or
+
+$ nautilus -n
